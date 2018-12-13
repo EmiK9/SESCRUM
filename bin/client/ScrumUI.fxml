@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import client.* ?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.*?>
+<?import fxmltableview.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ScrumUIController">
+   <children>
+      <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Scrum Board">
+               <content>
+                  <GridPane prefHeight="369.0" prefWidth="600.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Pane fx:id="notStartedColumn" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Text layoutX="32.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not Started" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Line endX="200.0" endY="1000.0" startX="200.0" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="inProgressColumn" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <children>
+                              <Text layoutX="31.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In Progress" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Line endX="200.0" endY="1000.0" startX="200.0" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="completedColumn" prefHeight="365.0" prefWidth="216.0" GridPane.columnIndex="2">
+                           <children>
+                              <Text layoutX="35.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                     </children>
+                  </GridPane>
+               </content>
+          </Tab>
+          <Tab text="Backlog">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <right>
+                        <ScrollBar orientation="VERTICAL" BorderPane.alignment="CENTER" />
+                     </right>
+                     <top>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sprint Review" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                     </top>
+                     <center>
+                        <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="sprintColumn" prefWidth="70.0" text="Sprint">
+                            	<cellValueFactory><PropertyValueFactory property="sprint" />
+                            	</cellValueFactory>
+                            </TableColumn>
+                            <TableColumn prefWidth="66.0" text="Priority">
+                            	<cellValueFactory><PropertyValueFactory property="priority" />
+                            	</cellValueFactory>
+                            </TableColumn>
+                            <TableColumn prefWidth="61.0" text="Title">
+                            	<cellValueFactory><PropertyValueFactory property="title" />
+                            	</cellValueFactory>
+                            </TableColumn>
+                            <TableColumn prefWidth="385.0" text="User Story">
+                            	<cellValueFactory><PropertyValueFactory property="story" />
+                            	</cellValueFactory>
+                            </TableColumn>
+                          </columns>
+                          <items>
+                          	<FXCollections fx:factory="observableArrayList">
+                          	</FXCollections>
+                          </items>
+                          <sortOrder>
+                          	<fx:reference source="sprintColumn" />
+                          </sortOrder>
+                        </TableView>
+                     </center>
+                  </BorderPane>
+               </content>
+          </Tab>
+            <Tab text="Burndown">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <LineChart fx:id="burndown" animated="false" BorderPane.alignment="CENTER">
+                          <xAxis>
+                            <NumberAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                     </center>
+                     <top>
+                        <TextArea editable="false" prefHeight="34.0" prefWidth="600.0" text="Burndown" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </TextArea>
+                     </top></BorderPane>
+               </content>
+            </Tab>
+            <Tab text="+ ADD WORK">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="200.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Work Item" textAlignment="CENTER">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="100.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="titleInput" layoutX="220.0" layoutY="82.0" />
+                        <Text layoutX="100.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assign To:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="authorInput" layoutX="220.0" layoutY="122.0" />
+                        <Text layoutX="100.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sprint:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="sprintInput" layoutX="220.0" layoutY="162.0" prefHeight="26.0" prefWidth="67.0" promptText="1, 2, 3..." />
+                        <Text layoutX="100.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="priorityInput" layoutX="220.0" layoutY="202.0" prefHeight="26.0" prefWidth="67.0" promptText="1, 2, 3..." />
+                        <Text layoutX="100.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Stories:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="storyInput" layoutX="220.0" layoutY="242.0" prefHeight="64.0" prefWidth="206.0" />
+                        <Button layoutX="457.0" layoutY="313.0" mnemonicParsing="false" onAction="#handleCreateButtonAction" text="Create" />
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>
